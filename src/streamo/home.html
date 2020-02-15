@@ -132,15 +132,22 @@
     <!--// header-medea -->  
     
     <!-- side-main-menu -->
+    <div class="vid" style="display:none" id="id02">
+        <!-- <span onclick="document.getElementById('id02').style.display='none'" class="close1">×</span>  -->
+            <video id="abc" width="960;" height="540" style="margin:100px 350px" controls>
+                <source src="./ad.mp4" type="video/mp4">
+            </video>
+        </div>
     <div class="side-main-menu">
         <nav class="sidebar-menu" data-simplebar>
             <ul>
                 <li class="normal-item-pro">
-                    <a href="moodMusic.html">
+                    <a id="adplay" onclick="checkAndPlayAd()" class="playvid">
                         <i class="zmdi zmdi-tv-alt-play"></i>
                         <span>Go Moody!!</span>
                     </a>
                 </li>
+                
                 <li class="normal-item-pro">
                     <a href="playlists.html">
                         <i class="zmdi zmdi-collection-music"></i>
@@ -803,7 +810,7 @@
 ============================================ -->
 
 <!-- jQuery JS -->
-<script src="assets/js/vendor/jquery-3.3.1.min.js"></script>
+
 <!-- Popper JS -->
 <script src="assets/js/popper.min.js"></script>
 <!-- Bootstrap JS -->
@@ -820,10 +827,86 @@
 <!-- Keys -->
 <script src='../js/firebase/init.js'></script> 
 
+
+
+<script src="../js/web3.min.js"></script>
+<script src="../js/truffle-contract.js"></script>
+<script src="../js/app.js"></script>
+
+<script>
+    function checkAndPlayAd(){
+        if(localStorage.getItem("ad")==1){
+            
+        }
+        else if(localStorage.getItem("rent")==1){
+            window.location.replace("./moodMusic.html");
+        }
+        else{
+            alert("You have blocked this feature.");
+        }
+        
+    }
+</script>
+
+<script>
+    var video = document.getElementById('abc');
+    var supposedCurrentTime = 0;
+    video.addEventListener('timeupdate', function() {
+    if (!video.seeking) {
+            supposedCurrentTime = video.currentTime;
+    }
+    });
+    // prevent user from seeking
+    video.addEventListener('seeking', function() {
+    // guard agains infinite recursion:
+    // user seeks, seeking is fired, currentTime is modified, seeking is fired, current time is modified, ....
+    var delta = video.currentTime - supposedCurrentTime;
+    if (Math.abs(delta) > 0.01) {
+        console.log("Seeking is disabled");
+        video.currentTime = supposedCurrentTime;
+    }
+    });
+    // delete the following event handler if rewind is not required
+    video.addEventListener('ended', function() {
+    // reset state in order to allow for rewind
+        supposedCurrentTime = 0;
+    });
+</script>
+
 <script>
 
     var w;
+    var vid = document.getElementById("abc");
+ 
+
     $(document).ready(()=>{
+
+
+        $(".playvid").click(()=>{
+            if(localStorage.getItem("ad")==1){
+                $(".vid").toggle();  // for Add
+            }
+        });
+
+        $(".vid").click(()=>{
+            if(vid.ended){
+                $(".vid").toggle();
+                App.distribute();
+                window.location.replace("./moodMusic.html");
+            }
+            
+        });
+        
+
+        
+
+        
+        App.init();
+       
+        $("#donate").click((e)=>{
+            e.preventDefault();
+            App.transfer("0x1c8dc7a9B5AE574080d75593136209449af6A596"); //publisher 1
+        });
 
         firebase.auth().onAuthStateChanged((user)=>{ // Keeping a watch whether a user is signed in or not
 

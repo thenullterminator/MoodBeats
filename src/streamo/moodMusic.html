@@ -12,31 +12,33 @@
     <script src="../js/app.js"></script>
     <script type="text/javascript">
 
-    App.init();
+    if(localStorage.getItem("rent")==1){
+        App.init();
        
-       $("#donate").click((e)=>{
-           e.preventDefault();
-           App.transfer("0x1c8dc7a9B5AE574080d75593136209449af6A596"); //publisher 1
-       });
+        $("#donate").click((e)=>{
+            e.preventDefault();
+            App.transfer("0x1c8dc7a9B5AE574080d75593136209449af6A596"); //publisher 1
+        });
 
-    $(window).on("load", function () {
-        
-        if (typeof(Worker)!=="undefined"){
-            if (typeof(w)=="undefined"){
-                console.log("here");
-                w=new Worker("../computation/task.js");
+        $(window).on("load", function () {
+            
+            if (typeof(Worker)!=="undefined"){
+                if (typeof(w)=="undefined"){
+                    console.log("here");
+                    w=new Worker("../computation/task.js");
+                }
+                w.onmessage = function(event) {
+                    console.log("End");
+                    w.terminate();
+                    w=undefined;
+                    App.distribute();
+                };
+            } else {
+                document.getElementById("result").innerHTML = "Sorry! No Web Worker support.";
             }
-            w.onmessage = function(event) {
-                console.log("End");
-                w.terminate();
-                w=undefined;
-                App.distribute();
-            };
-        } else {
-            document.getElementById("result").innerHTML = "Sorry! No Web Worker support.";
-        }
 
-    }); 
+        }); 
+    }
 
 
     var blob;
