@@ -152,36 +152,21 @@
                                         <p>Log in into your metamask using below.</p>
                                         <p>Your Private Key: <b><span id='privateKey'></span></b></p>
                                         <p>Your Balance: <b><span id="Balance"></span></b></p>
-
                                         <p> Type Select:
-                                            <input type="radio" id="rent" name="typeSelect" value="rent">
-                                            <label for="rent">Rent</label>&nbsp;&nbsp;
-                                            <input checked type="radio" id="ad" name="typeSelect" value="ad">
-                                            <label for="ad">Ad</label>&nbsp;&nbsp;
-                                            <input  type="radio" id="none" name="typeSelect" value="none">
-                                            <label for="none">None</label><br>
-                                            </p>
-                                            <button type="button" onclick="displayRadioValue()"> 
-                                                Submit 
-                                            </button> 
-                                            <script> 
-                                                function displayRadioValue() { 
-                                                    var ele = document.getElementsByName('typeSelect'); 
-                                                      
-                                                    for(i = 0; i < ele.length; i++) { 
-                                                        if(ele[i].checked){
-                                                            localStorage.setItem(ele[i].value,1);
-                                                        } 
-                                                        else{
-                                                            localStorage.setItem(ele[i].value,0);
-                                                        }
-                                                        // document.getElementById("result").innerHTML
-                                                        //         = "Gender: "+ele[i].value; 
-                                                    } 
-                                                } 
-
+                                        <input type="radio" id="rent" name="typeSelect" value="rent">
+                                        <label for="rent">Rent</label>&nbsp;&nbsp;
+                                        <input type="radio" id="ad" name="typeSelect" value="ad">
+                                        <label for="ad">Ad</label>&nbsp;&nbsp;
+                                        <input type="radio" id="none" name="typeSelect" value="none">
+                                        <label for="none">None</label><br>
+                                        </p>
+                                        <button type="button" onclick="displayRadioValue()"> 
+                                            Submit 
+                                        </button> 
+                                        <script> 
+                                            function displayRadioValue() { 
                                                 var ele = document.getElementsByName('typeSelect'); 
-                                                      
+                                                  
                                                 for(i = 0; i < ele.length; i++) { 
                                                     if(ele[i].checked){
                                                         localStorage.setItem(ele[i].value,1);
@@ -192,9 +177,8 @@
                                                     // document.getElementById("result").innerHTML
                                                     //         = "Gender: "+ele[i].value; 
                                                 } 
-                                                
-                                            </script>
-
+                                            } 
+                                        </script> 
                                     </div>
                                     <div class="tab-pane fade" id="orders">
                                         <h3>Orders</h3>
@@ -504,6 +488,35 @@
     });
 
 </script>
+
+<!-- <script>
+    var rad = document.myForm.myRadios;
+    var prev = null;
+    for (var i = 0; i < rad.length; i++) {
+        rad[i].addEventListener('change', function() {
+            (prev) ? console.log(prev.value): null;
+            if (this !== prev) {
+                prev = this;
+            }
+            console.log(this.value)
+        });
+    }
+
+    </script> -->
+
+<!-- <script>
+    // Check if the localStorage object exists
+    if(localStorage) {
+        // Store data
+        localStorage.setItem("first_name", "Peter");
+        // var type=
+        
+        // Retrieve data
+        alert("Hi, " + localStorage.getItem("first_name"));
+    } else {
+        alert("Sorry, your browser do not support local storage.");
+    }
+</script> -->
 
 </body>
 
