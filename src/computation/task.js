@@ -51,6 +51,7 @@ function reduce(A,B,C){
                 } else { // show the result
                         // alert(`Done, got ${xhr.response.length} bytes`); // responseText is the server
                         console.log("Done!!");
+                        postMessage("y");
                         // map(res.A,res.B);
                 }
         };

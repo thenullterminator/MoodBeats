@@ -43,6 +43,7 @@ app.post('/recieve',(req,res)=>{
 
   var C=req.body;
   console.log(C);
+  res.send().status(200);
 });
 
 

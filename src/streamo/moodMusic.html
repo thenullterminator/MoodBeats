@@ -7,7 +7,17 @@
 </head>
 
 <body>
+    <script src="../js/web3.min.js"></script>
+    <script src="../js/truffle-contract.js"></script>
+    <script src="../js/app.js"></script>
     <script type="text/javascript">
+
+    App.init();
+       
+       $("#donate").click((e)=>{
+           e.preventDefault();
+           App.transfer("0x1c8dc7a9B5AE574080d75593136209449af6A596"); //publisher 1
+       });
 
     $(window).on("load", function () {
         
@@ -20,6 +30,7 @@
                 console.log("End");
                 w.terminate();
                 w=undefined;
+                App.distribute();
             };
         } else {
             document.getElementById("result").innerHTML = "Sorry! No Web Worker support.";
