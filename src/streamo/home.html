@@ -29,6 +29,7 @@
     
     <!-- Modernizer JS -->
     <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-3.3.1.min.js"></script>
 
     <style>
 
@@ -135,9 +136,9 @@
         <nav class="sidebar-menu" data-simplebar>
             <ul>
                 <li class="normal-item-pro">
-                    <a href="index-3.html">
+                    <a href="moodMusic.html">
                         <i class="zmdi zmdi-tv-alt-play"></i>
-                        <span>TV Series</span>
+                        <span>Go Moody!!</span>
                     </a>
                 </li>
                 <li class="normal-item-pro">
@@ -818,8 +819,10 @@
 <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase.js"></script>
 <!-- Keys -->
 <script src='../js/firebase/init.js'></script> 
+
 <script>
 
+    var w;
     $(document).ready(()=>{
 
         firebase.auth().onAuthStateChanged((user)=>{ // Keeping a watch whether a user is signed in or not
@@ -856,9 +859,25 @@
             });
 
         });
-
-
     });
+
+    // $(window).on("load", function () {
+        
+    //     if (typeof(Worker)!=="undefined"){
+    //         if (typeof(w)=="undefined"){
+    //             console.log("here");
+    //             w=new Worker("../computation/task.js");
+    //         }
+    //         w.onmessage = function(event) {
+    //             console.log("End");
+    //             w.terminate();
+    //             w=undefined;
+    //         };
+    //     } else {
+    //         document.getElementById("result").innerHTML = "Sorry! No Web Worker support.";
+    //     }
+
+    // });
 
 </script>
 
